@@ -1,0 +1,454 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap'); /* Fonte moderna */
+
+:root {
+    --bg-dark-primary: #12121a; /* Fundo principal bem escuro */
+    --bg-dark-secondary: #1a1a2e; /* Fundo ligeiramente mais claro para seções/cards */
+    --bg-dark-tertiary: #2a2a3a; /* Fundo para inputs ou detalhes */
+    --border-color: #3a3a6a; /* Cor sutil para bordas */
+    --text-primary: #e0e0e0; /* Cor principal do texto (quase branco) */
+    --text-secondary: #a0a0c0; /* Cor secundária para detalhes */
+    --accent-primary: #6d5ae8; /* Roxo/Azul vibrante principal */
+    --accent-secondary: #5aa8e8; /* Azul claro para detalhes/botões */
+    --accent-danger: #e85a5a; /* Vermelho para remover/erro */
+    --font-family-main: 'Poppins', sans-serif; /* Fonte importada */
+}
+
+body {
+    font-family: var(--font-family-main);
+    line-height: 1.6;
+    margin: 0; /* Remove margens padrão */
+    padding: 0; /* Remove paddings padrão */
+    background-color: var(--bg-dark-primary);
+    color: var(--text-primary);
+    display: flex; /* Centralizar conteúdo */
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container { /* Adiciona um container para limitar a largura */
+    width: 90%;
+    max-width: 1100px; /* Largura máxima */
+    padding: 20px 0; /* Espaçamento vertical */
+}
+
+h1, h2 {
+    color: #ffffff; /* Branco puro para títulos principais */
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: 600;
+    letter-spacing: 1px; /* Pequeno espaçamento */
+}
+
+h1 {
+    font-size: 2.8em;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    text-transform: uppercase; /* Como no exemplo NIKE */
+    color: var(--accent-primary); /* Usar cor de destaque */
+    text-shadow: 0 0 5px rgba(109, 90, 232, 0.5); /* Brilho sutil */
+}
+
+h2 {
+    font-size: 1.8em;
+    border-bottom: 2px solid var(--accent-primary); /* Linha inferior com cor */
+    padding-bottom: 10px;
+    display: inline-block; /* Para a borda ajustar ao texto */
+    position: relative; /* Necessário para centralizar pseudo-elementos se quiser */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+section {
+    background-color: var(--bg-dark-secondary);
+    padding: 30px;
+    margin-bottom: 30px;
+    border-radius: 12px; /* Bordas mais arredondadas */
+    border: 1px solid var(--border-color);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Sombra mais pronunciada */
+}
+
+/* Formulários */
+#form-veiculo, #planejador-viagem {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+    align-items: center; /* Alinha itens verticalmente */
+}
+
+#cadastro-veiculo h2, #garagem h2, #planejador-viagem h2 {
+    width: 100%; /* Faz o H2 ocupar a largura para centralizar corretamente */
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+
+input[type="text"],
+input[type="number"] {
+    background-color: var(--bg-dark-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    padding: 12px 15px;
+    border-radius: 6px;
+    font-family: inherit; /* Usa a fonte do body */
+    font-size: 1em;
+    flex-grow: 1;
+    min-width: 180px; /* Um pouco maior */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(109, 90, 232, 0.3); /* Efeito glow no foco */
+}
+
+::placeholder {
+color: var(--text-secondary);
+opacity: 0.7;
+}
+
+/* Botões */
+button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600; /* Mais negrito */
+    font-family: inherit;
+    font-size: 1em;
+    text-transform: uppercase; /* Como botões de ação */
+    letter-spacing: 0.5px;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+button:hover {
+    transform: translateY(-3px); /* Efeito de levantar mais pronunciado */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+button:active {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+button:disabled { /* Estilo para botão desabilitado */
+    background-color: #555;
+    color: #999;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+
+#form-veiculo button, #verificar-clima-btn {
+    background-color: var(--accent-primary);
+    color: white;
+    flex-grow: 0; /* Não esticar tanto no form */
+}
+#form-veiculo button:hover, #verificar-clima-btn:hover:not(:disabled) {
+    background-color: #5a4abd;
+}
+
+/* Lista de Veículos */
+#lista-veiculos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Cards um pouco maiores */
+    gap: 25px;
+}
+
+.veiculo-card {
+    background-color: var(--bg-dark-tertiary); /* Usa o tertiary para destacar do fundo da seção */
+    border: 1px solid var(--border-color);
+    padding: 25px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.veiculo-card:hover {
+    transform: translateY(-5px) scale(1.02); /* Leve zoom e levantar */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    border-color: var(--accent-secondary);
+}
+
+.veiculo-card h3 {
+    margin-top: 0;
+    color: var(--accent-secondary); /* Azul claro para o título do card */
+    margin-bottom: 15px;
+    font-size: 1.4em;
+    font-weight: 600;
+}
+
+.veiculo-card p {
+    margin: 8px 0;
+    font-size: 0.95em;
+    color: var(--text-secondary);
+}
+.veiculo-card p strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* Container dos botões no card */
+.veiculo-card > div:last-of-type {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+ .veiculo-card button { /* Botões dentro do card */
+     flex-grow: 1; /* Ocupar espaço igual */
+     padding: 10px 15px; /* Um pouco menor */
+    font-size: 0.9em;
+}
+
+.remover-btn {
+    background-color: var(--accent-danger);
+    color: white;
+}
+.remover-btn:hover:not(:disabled) {
+    background-color: #d04848;
+}
+
+.ver-detalhes-btn {
+    background-color: var(--accent-secondary);
+    color: white;
+}
+.ver-detalhes-btn:hover:not(:disabled) {
+    background-color: #4890c8;
+}
+
+
+/* Detalhes Extras */
+.detalhes-extras-content {
+    margin-top: 15px;
+    padding: 15px 20px;
+    background-color: rgba(0, 0, 0, 0.2); /* Fundo semi-transparente escuro */
+    border-radius: 6px;
+    font-size: 0.9em;
+    border-left: 5px solid var(--accent-secondary);
+    color: var(--text-secondary);
+}
+.detalhes-extras-content p { margin: 5px 0; }
+.detalhes-extras-content strong { color: var(--text-primary); }
+
+/* Loading/Error States (Dark Theme) */
+.loading, .error {
+    font-style: italic;
+    font-weight: bold;
+}
+
+.detalhes-extras-content.loading {
+    color: var(--accent-secondary);
+    border-left-color: var(--accent-secondary);
+}
+.detalhes-extras-content.error {
+    color: var(--accent-danger);
+    border-left-color: var(--accent-danger);
+    background-color: rgba(232, 90, 90, 0.1);
+}
+
+/* Planejador de Viagem & Previsão */
+#planejador-viagem {
+    flex-direction: column; /* Empilhar input e botão */
+    align-items: center;
+    gap: 20px; /* Mais espaço */
+}
+#destino-viagem {
+    width: 80%;
+    max-width: 450px;
+    text-align: center;
+    font-size: 1.1em;
+}
+#verificar-clima-btn {
+    width: auto; /* Não esticar */
+    padding: 12px 35px; /* Botão mais largo */
+}
+
+#previsao-tempo-resultado {
+    margin-top: 25px;
+    padding: 25px;
+    background-color: var(--bg-dark-secondary); /* Mesmo fundo das seções */
+    border-radius: 10px;
+    min-height: 80px;
+    width: 95%;
+    max-width: 600px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+#previsao-tempo-resultado.loading,
+#previsao-tempo-resultado.error {
+    font-style: italic;
+    font-weight: bold;
+     padding: 30px; /* Mais padding quando só texto */
+}
+#previsao-tempo-resultado.loading {
+    color: var(--accent-secondary);
+}
+#previsao-tempo-resultado.error {
+    color: var(--accent-danger);
+    background-color: rgba(232, 90, 90, 0.1);
+    border: 1px solid var(--accent-danger);
+}
+
+ /* Estilos específicos para a previsão quando OK */
+#previsao-tempo-resultado h3 {
+     color: var(--accent-primary); /* Roxo/Azul para o nome da cidade */
+    margin-bottom: 15px;
+    font-size: 1.6em;
+}
+#previsao-tempo-resultado img {
+     background-color: rgba(255, 255, 255, 0.1); /* Fundo sutil para o ícone */
+    border-radius: 50%;
+     margin: 0 auto 10px auto; /* Centralizar e espaço abaixo */
+    display: block;
+     width: 80px; /* Tamanho do ícone */
+    height: 80px;
+}
+#previsao-tempo-resultado p { margin: 6px 0; font-size: 1em; }
+ #previsao-tempo-resultado strong { color: #fff; } /* Labels em branco */
+ #previsao-tempo-resultado p:first-of-type { /* Descrição capitalizada */
+    text-transform: capitalize;
+    font-weight: bold;
+    font-size: 1.1em;
+    color: var(--text-primary);
+}
+ #previsao-tempo-resultado p:last-of-type { /* Nota da OpenWeatherMap */
+    font-size: 0.8em;
+    color: var(--text-secondary);
+    opacity: 0.7;
+    margin-top: 15px;
+}
+
+/* Linha Horizontal */
+hr {
+    border: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border-color), transparent); /* Gradiente sutil */
+    margin: 50px 0;
+    width: 80%; /* Não ocupar a tela toda */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Pequenos ajustes de responsividade */
+@media (max-width: 768px) {
+    h1 { font-size: 2.2em; }
+    h2 { font-size: 1.5em; }
+    .container { width: 95%; }
+    #form-veiculo { flex-direction: column; align-items: stretch; }
+    #form-veiculo input, #form-veiculo button { min-width: unset; width: 100%; }
+    #lista-veiculos { grid-template-columns: 1fr; } /* Uma coluna em telas pequenas */
+    .veiculo-card > div:last-of-type { flex-direction: column; } /* Botões do card empilhados */
+}
+
+/* Estilos para Previsão Detalhada (Múltiplos Dias) */
+#previsao-tempo-resultado h3 { /* Título da seção de previsão */
+    color: var(--accent-primary);
+    margin-bottom: 20px;
+    font-size: 1.6em;
+    text-align: center;
+}
+
+.forecast-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Espaçamento entre os cards de cada dia */
+    justify-content: center; /* Centraliza os cards se não preencherem a linha */
+    margin-top: 15px;
+}
+
+.forecast-day-card {
+    background-color: var(--bg-dark-tertiary); /* Fundo do card de cada dia */
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    /* Flex-basis para tentar caber 3 ou mais cards por linha, dependendo da largura */
+    flex-basis: calc(33.333% - 20px); /* Ajustado pelo gap */
+    min-width: 180px; /* Largura mínima para cada card */
+    flex-grow: 1; /* Permite que os cards cresçam se houver espaço */
+    box-shadow: 0 3px 7px rgba(0,0,0,0.25);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.forecast-day-card:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+.forecast-day-card h4 { /* Data (dia da semana, DD/MM) */
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: var(--accent-secondary); /* Cor de destaque para a data */
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.forecast-day-card img { /* Ícone do tempo */
+    width: 70px;
+    height: 70px;
+    margin: 5px auto;
+    background-color: rgba(255, 255, 255, 0.05); /* Fundo sutil para o ícone */
+    border-radius: 50%;
+}
+
+.forecast-day-card p {
+    margin: 6px 0;
+    font-size: 0.95em;
+    color: var(--text-secondary);
+}
+
+.forecast-day-card p.descricao { /* Descrição do tempo (ex: "nublado") */
+    text-transform: capitalize; /* Primeira letra maiúscula */
+    font-weight: 500;
+    color: var(--text-primary);
+    min-height: 2.2em; /* Ajuda a alinhar cards com descrições de tamanhos diferentes */
+}
+
+.forecast-day-card p strong { /* Labels "Min:", "Máx:" */
+    color: var(--text-primary);
+}
+
+
+/* Ajustes responsivos para os cards de previsão */
+@media (max-width: 992px) { /* Tablets e telas menores */
+    .forecast-day-card {
+        flex-basis: calc(50% - 15px); /* Tenta 2 cards por linha */
+    }
+}
+
+@media (max-width: 600px) { /* Telas mobile */
+    .forecast-container {
+        flex-direction: column; /* Empilha os cards */
+        align-items: center; /* Centraliza os cards empilhados */
+    }
+    .forecast-day-card {
+        flex-basis: 90%; /* Card ocupa mais largura quando empilhado */
+        width: 90%;
+        max-width: 350px;
+        margin-bottom: 15px;
+    }
+    .forecast-day-card:last-child {
+        margin-bottom: 0;
+    }
+}
+
+#previsao-tempo-resultado.loading,
+#previsao-tempo-resultado.error {
+    font-style: italic;
+    font-weight: bold;
+    padding: 30px;
+    text-align: center;
+}
+#previsao-tempo-resultado.loading {
+    color: var(--accent-secondary);
+}
+#previsao-tempo-resultado.error {
+    color: var(--accent-danger);
+    background-color: rgba(232, 90, 90, 0.1);
+    border: 1px solid var(--accent-danger);
+}
+*/
